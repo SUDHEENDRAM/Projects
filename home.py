@@ -5,8 +5,11 @@ import mysql.connector
 mydb = mysql.connector.connect(
   host="database-1.ckmwbrm2zkd4.us-east-1.rds.amazonaws.com",
   user="admin",
-  password="yourpassword"
+  password="Kanna123456",
+    database="car_renter_management"
+
 )
+mycursor = mydb.cursor()
 
 
 import random
@@ -310,12 +313,13 @@ def reg():
             state = user_details[4]
             print("303")
             address = user_details[5]
-            cur = mysql.connection.cursor()
+            mycursor = mydb.cursor()
+           # cur = mysql.connection.cursor()
             print("306")
-            cur.execute("insert into  coustemers values(%s,%s,%s,%s,%s,%s)",
+            mycursor.execute("insert into  coustemers values(%s,%s,%s,%s,%s,%s)",
                         (name, email, password, mobile, state, address))
-            mysql.connection.commit()
-            cur.close()
+            mydb.commit()
+            mycursor.close()
             print("311")
             return render_template('verify.html', form=form)
         else:
